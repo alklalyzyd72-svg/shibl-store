@@ -1,1 +1,80 @@
 
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>متجر شبل - الخدمات الرقمية</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <!-- كود شبكة الإعلانات Monetag (ضع سكربت الإعلان الخاص بك هنا) -->
+    <script src="https://alwingulla.com/88/tag.min.js" data-zone="ضع_رقم_الـ_Zone_هنا" async data-cfasync="false"></script>
+    <style>
+        body { font-family: Tahoma, sans-serif; background-color: #0f172a; color: #f8fafc; margin: 0; padding: 15px; text-align: center; }
+        h1 { color: #38bdf8; font-size: 22px; margin-bottom: 10px; }
+        .wallet { background: #1e293b; border: 1px solid #facc15; border-radius: 10px; padding: 10px; margin-bottom: 15px; font-size: 16px; color: #facc15; font-weight: bold; }
+        .card { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 15px; margin-bottom: 15px; text-align: right; }
+        .card h3 { color: #facc15; margin: 0 0 10px 0; font-size: 18px; }
+        .card p { color: #94a3b8; font-size: 14px; margin: 0 0 15px 0; }
+        .btn { background: #0284c7; color: white; border: none; padding: 10px 15px; border-radius: 8px; width: 100%; font-size: 16px; cursor: pointer; font-weight: bold; margin-top: 5px; }
+        .btn-ad { background: #16a34a; color: white; border: none; padding: 10px 15px; border-radius: 8px; width: 100%; font-size: 16px; cursor: pointer; font-weight: bold; }
+        .btn:active { background: #0369a1; }
+    </style>
+</head>
+<body>
+
+    <h1>متجر شبل للخدمات الرقمية 🚀</h1>
+    
+    <div class="wallet" id="wallet">رصيدك: <span id="points">0</span> نقطة</div>
+
+    <div class="card" style="text-align: center;">
+        <h3>جمع نقاط مجانية 🎁</h3>
+        <p>شاهد إعلان قصير واحصل على نقاط لتشتري بها مجاناً!</p>
+        <button class="btn-ad" onclick="watchAd()">شاهد إعلان واربح نقاطاً</button>
+    </div>
+
+    <div class="card">
+        <h3>أرقام وهمية لتفعيل التطبيقات</h3>
+        <p>احصل على رقم دولي مفعل وجاهز لتليجرام، واتساب، وغيرها.</p>
+        <button class="btn" onclick="buyItem('رقم وهمي لتفعيل التطبيقات', 50)">شراء (50 نقطة)</button>
+    </div>
+
+    <div class="card">
+        <h3>شحن شدات ببجي وسلالم الألعاب</h3>
+        <p>شحن سريع ومضمون لحسابات الألعاب بأسعار منافسة.</p>
+        <button class="btn" onclick="buyItem('شحن شدات ببجي', 100)">شراء (100 نقطة)</button>
+    </div>
+
+    <script>
+        const tg = window.Telegram.WebApp;
+        tg.expand();
+
+        // نظام النقاط المخزن في متصفح المستخدم
+        let userPoints = localStorage.getItem('shibl_points') ? parseInt(localStorage.getItem('shibl_points')) : 10;
+        document.getElementById('points').innerText = userPoints;
+
+        function watchAd() {
+            // محاكاة مشاهدة الإعلان وإضافة النقاط (استبدل هذا بدالة إعلانات Monetag الفعلية عندما تربط كودهم)
+            alert("جاري عرض الإعلان المكافئ...");
+            setTimeout(() => {
+                userPoints += 10;
+                localStorage.setItem('shibl_points', userPoints);
+                document.getElementById('points').innerText = userPoints;
+                alert("مبروك! تمت إضافة 10 نقاط إلى رصيدك.");
+            }, 1500);
+        }
+
+        function buyItem(itemName, itemPrice) {
+            if (userPoints < itemPrice) {
+                alert("رصيدك غير كافي! شاهد بعض الإعلانات لتجمع نقاطاً أكثر.");
+                return;
+            }
+
+            const userId = tg.initDataUnsafe?.user?.id || 'مستخدم غير معروف';
+            const message = `مرحباً، أريد شراء: ${itemName} مقابل النقاط (معرف المستخدم: ${userId})`;
+            const whatsappUrl = `https://wa.me/967000000000?text=${encodeURIComponent(message)}`;
+            
+            window.open(whatsappUrl, '_blank');
+        }
+    </script>
+</body>
+</html>
